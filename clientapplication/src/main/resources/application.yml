@@ -1,0 +1,45 @@
+server:
+  port: 8080
+
+# spring:
+#   datasource:
+#     url: jdbc:h2:mem:testdb
+#     username: root
+#     password: root
+#     driver-class-name: org.h2.Driver
+#   h2:
+#     console:
+#       enabled: true
+#       path: /db
+#       settings:
+#         web-allow-others: false
+#   jpa:
+#     database-platform: org.hibernate.dialect.H2Dialect
+#     show-sql: true
+#     hibernate:
+#       ddl-auto: update
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          api-client:
+            provider: spring
+            client-id: api-client
+            client-secret: secret
+            client-authentication-method: client_secret_basic
+            authorization-grant-type: authorization_code
+            redirect-uri: "http://127.0.0.1:8080/login/oauth2/code/api-client"
+            scope: phone
+            client-name: api-client
+          api-client-authorization-code:
+            provider: spring
+            client-id: api-client
+            client-secret: secret
+            authorization-grant-type: authorization_code
+            redirect-uri: "http://127.0.0.1:8080/jagadish"
+            scope: api.read
+            client-name: api-client-authorization-code
+        provider:
+          spring:
+            issuer-uri: http://auth-server:9000
